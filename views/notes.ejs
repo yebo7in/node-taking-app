@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Notes</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS file -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet"> <!-- Quill's CSS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <style>
+        /* Add custom styles here */
+        button {
+            padding: 10px 15px; /* Adjust padding */
+            margin: 5px; /* Spacing between buttons */
+            max-width: 150px; /* Max width for buttons */
+            display: inline-block; /* Keep buttons inline */
+        }
+
+        .filter-buttons {
+            margin-bottom: 20px; /* Space below filter buttons */
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Notes</h1>
+
+    <!-- Flash messages -->
+    <% if (success_msg) { %>
+        <div class="alert alert-success"><%= success_msg %></div>
+    <% } %>
+    <% if (error_msg) { %>
+        <div class="alert alert-danger"><%= error_msg %></div>
+    <% } %>
+
+    <!-- Filter Buttons -->
+    <div class="filter-buttons">
+        <form action="/notes" method="GET" style="display:inline;">
+            <button type="submit" name="filter" value="all">All Notes</button>
+        </form>
+        <form action="/notes" method="GET" style="display:inline;">
+            <button type="submit" name="filter" value="starred">Starred Notes</button>
+        </form>
+        <form action="/notes" method="GET" style="display:inline;">
+            <button type="submit" name="filter" value="pinned">Pinned Notes</button>
+        </form>
+        
+        <!-- Date Filter Inputs -->
+        <form action="/notes" method="GET" style="display:inline;">
+            <input type="date" name="startDate" required>
+             <input type="date" name="endDate" required>
+             <button type="submit" name="filter" value="date">Filter by Date</button>
+        </form> 
+    </div>
+
+    <!-- Note creation form -->
+    <form id="note-form" action="/add-note" method="POST">
+        <input type="text" name="title" placeholder="Title" required>
+        <div id="editor"></div> <!-- Quill Editor -->
+        <input type="hidden" name="content" id="content" required> <!-- Hidden input for content -->
+        <button type="submit">Save Note</button>
+    </form>
+
+    <!-- Display notes -->
+    <ul>
+        <% notes.forEach(note => { %>
+            <li>
+                <strong><%= note.title %></strong> <!-- Display note title -->
+                <p><%- note.content %></p> <!-- Display note content as HTML -->
+                <p>Created at: <%= note.createdAt.toLocaleString() %></p> <!-- Show created time -->
+                <form action="/toggle-star/<%= note._id %>" method="POST" style="display:inline;">
+                    <button type="submit"><%= note.isStarred ? 'Unstar' : 'Star' %></button>
+                </form>
+                <form action="/toggle-pin/<%= note._id %>" method="POST" style="display:inline;">
+                    <button type="submit"><%= note.isPinned ? 'Unpin' : 'Pin' %></button>
+                </form>
+                <form action="/edit-note/<%= note._id %>" method="GET" style="display:inline;">
+                    <button type="submit">Edit</button>
+                </form>
+                <form action="/delete-note/<%= note._id %>" method="POST" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }); %>
+    </ul>
+
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    ['bold', 'italic', 'underline'],        // toggled buttons
+                    ['link', 'image'],                       // link and image
+                    [{ list: 'ordered' }, { list: 'bullet' }], // lists
+                    ['clean']                                // remove formatting button
+                ]
+            }
+        });
+
+        // On form submission, set the hidden content field with Quill's HTML
+        document.querySelector('#note-form').onsubmit = function() { // Target the note form specifically
+            var content = document.querySelector('#content');
+            content.value = quill.root.innerHTML; // Get HTML from Quill
+            
+            // Check if content is empty before submission
+            if (!content.value.trim()) {
+                alert('Content cannot be empty!');
+                return false; // Prevent form submission if content is empty
+            }
+        };
+    </script>
+</body>
+</html>

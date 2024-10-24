@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
 const bodyParser = require('body-parser');
-const User = require('./models/User'); // Import your User model
-const Note = require('./models/Note'); // Import the Note model
-const bcrypt = require('bcrypt'); // For hashing passwords
-require('dotenv').config(); // Load environment variables from .env file
+const User = require('./models/User'); 
+const Note = require('./models/Note'); 
+const bcrypt = require('bcrypt'); 
+require('dotenv').config(); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,7 +17,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
     .catch(err => console.error('MongoDB connection error:', err));
 
 // Middleware
-app.set('view engine', 'ejs'); // Using EJS for templating
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(session({

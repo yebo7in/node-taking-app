@@ -1,119 +1,104 @@
-/* styles.css */
-
-/* Reset some default styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body styles */
 body {
-    font-family: 'Arial', sans-serif; /* Change the font family */
-    line-height: 1.6; /* Improve readability */
-    background-color: #f4f4f4; /* Light background */
-    color: #333; /* Dark text color */
-    padding: 20px; /* Add some padding */
+    font-family: 'Arial', sans-serif; 
+    line-height: 1.6; 
+    background-color: #f4f4f4;
+    color: #333; 
+    padding: 20px; 
 }
 
-/* Header styles */
 h1 {
     margin-bottom: 20px;
-    color: #5D8AA8; /* A calming blue color for headers */
+    color: #5D8AA8; 
 }
 
-/* Links */
 a {
-    color: #5D8AA8; /* Same color as headers */
-    text-decoration: none; /* Remove underline */
+    color: #5D8AA8; 
+    text-decoration: none; 
 }
 
 a:hover {
-    text-decoration: underline; /* Underline on hover */
+    text-decoration: underline; 
 }
 
-/* Form styles */
 form {
-    background: #fff; /* White background for forms */
-    padding: 20px; /* Add padding */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow */
-    margin-bottom: 20px; /* Space between forms */
+    background: #fff; 
+    padding: 20px; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 20px;
 }
 
-/* Input fields */
 input[type="text"],
 input[type="email"],
 input[type="password"],
 button {
-    width: 100%; /* Full width */
-    padding: 10px; /* Padding */
-    margin-bottom: 10px; /* Space below */
-    border: 1px solid #ccc; /* Light border */
-    border-radius: 4px; /* Rounded corners */
+    width: 100%;
+    padding: 10px; 
+    margin-bottom: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
 }
 
-/* Button styles */
-/* General button styles */
-/* General button styles */
 button, .button {
-    display: inline-block; /* Keep buttons inline */
-    padding: 10px 15px; /* Padding inside the button */
-    margin: 5px; /* Margin around the button */
-    background-color: #007BFF; /* Button color */
-    color: white; /* Text color */
-    text-decoration: none; /* Remove underline for links */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 16px; /* Consistent font size */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    transition: background-color 0.3s; /* Smooth transition */
-    width: auto; /* Allow width to be auto */
-    min-width: 100px; /* Set a minimum width */
+    display: inline-block; 
+    padding: 10px 15px; 
+    margin: 5px; 
+    background-color: #007BFF; 
+    color: white; 
+    text-decoration: none; 
+    border: none; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    width: auto; 
+    min-width: 100px; 
 }
 
-/* Button hover effect */
 button:hover, .button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #0056b3; 
 }
 
-/* Ensure form elements are inline */
 form {
-    display: inline-block; /* Keep forms inline with other elements */
+    display: inline-block; 
 }
 
-/* Alert messages */
 .alert {
     padding: 10px;
     border-radius: 4px;
-    margin-bottom: 20px; /* Space below */
+    margin-bottom: 20px; 
 }
 
 .alert-success {
-    background-color: #d4edda; /* Light green background */
-    color: #155724; /* Dark green text */
+    background-color: #d4edda; 
+    color: #155724; 
 }
 
 .alert-danger {
-    background-color: #f8d7da; /* Light red background */
-    color: #721c24; /* Dark red text */
+    background-color: #f8d7da; 
+    color: #721c24; 
 }
 
-/* Notes list */
 ul {
-    list-style-type: none; /* Remove bullet points */
-    padding: 0; /* Remove padding */
+    list-style-type: none; 
+    padding: 0; 
 }
 
 li {
-    background: #fff; /* White background for notes */
-    margin-bottom: 10px; /* Space between notes */
-    padding: 15px; /* Padding inside notes */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Slight shadow */
+    background: #fff; 
+    margin-bottom: 10px; 
+    padding: 15px; 
+    border-radius: 5px; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
 }
 
 li strong {
-    display: block; /* Title as a block element */
-    margin-bottom: 5px; /* Space below title */
+    display: block; 
+    margin-bottom: 5px; 
 }

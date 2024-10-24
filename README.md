@@ -79,7 +79,7 @@ to access the note-taking application.
 
 If you would like to contribute to this project, feel free to submit a pull request or open an issue.
 
-# Wins in this project
+# About this project
 
 ## Hardest part
 - setting up enviroment

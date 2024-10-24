@@ -21,7 +21,7 @@ app.set('view engine', 'ejs'); // Using EJS for templating
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(session({
-    secret: process.env.SESSION_SECRET, // Ensure this is in your .env file
+    secret: process.env.SESSION_SECRET, 
     resave: false,
     saveUninitialized: true,
 }));
@@ -34,32 +34,32 @@ app.use((req, res, next) => {
     next();
 });
 
-// Define routes here
+// Define routes
 app.get('/', (req, res) => {
-    res.render('index'); // Render index.ejs for the welcome page
+    res.render('index'); 
 });
 
 // Registration Page
 app.get('/register', (req, res) => {
-    res.render('register'); // Render register.ejs
+    res.render('register'); 
 });
 
 // Login Page
 app.get('/login', (req, res) => {
-    res.render('login'); // Render login.ejs
+    res.render('login'); 
 });
 
 //Node Page
 app.get('/notes', async (req, res) => {
     if (!req.session.userId) {
-        return res.redirect('/login'); // Redirect to login if not authenticated
+        return res.redirect('/login'); 
     }
 
     try {
-        const { filter, startDate, endDate } = req.query; // Get filter and dates from query params
+        const { filter, startDate, endDate } = req.query; 
         let notes;
 
-        // Build the query for notes based on the filters
+    
         let query = { userId: req.session.userId };
 
         if (filter === 'starred') {
@@ -70,35 +70,34 @@ app.get('/notes', async (req, res) => {
 
         // Add date filtering
         if (startDate || endDate) {
-            query.createdAt = {}; // Create a new object for createdAt filtering
+            query.createdAt = {}; 
             
-            // Log incoming date values for debugging
             console.log("Incoming Dates: ", { startDate, endDate });
 
             if (startDate) {
-                query.createdAt.$gte = new Date(startDate); // Greater than or equal to start date
+                query.createdAt.$gte = new Date(startDate); 
             }
             if (endDate) {
                 const endDateObject = new Date(endDate);
-                // Check the end date before modifying it
+               
                 console.log("Original End Date: ", endDateObject);
 
-                // Set end date to the end of the day
+                
                 endDateObject.setHours(23, 59, 59, 999); 
                 console.log("Adjusted End Date: ", endDateObject);
 
-                query.createdAt.$lte = endDateObject; // Less than or equal to end date
+                query.createdAt.$lte = endDateObject;
             }
         }
 
         // Log the query to check its structure
         console.log("Query being used:", query);
 
-        notes = await Note.find(query); // Fetch notes based on the constructed query
-        res.render('notes', { notes }); // Pass notes to the view
+        notes = await Note.find(query); 
+        res.render('notes', { notes }); 
     } catch (error) {
         console.error('Error fetching notes:', error);
-        res.render('notes', { notes: [] }); // If error, render with an empty array
+        res.render('notes', { notes: [] }); 
     }
 });
 
@@ -145,9 +144,9 @@ app.post('/login', async (req, res) => {
 app.post('/add-note', async (req, res) => {
     const { title, content } = req.body;
     const note = new Note({
-        userId: req.session.userId, // Use session user ID
+        userId: req.session.userId, 
         title: title,
-        content: content, // Save raw HTML content
+        content: content, 
     });
 
     try {
@@ -166,7 +165,7 @@ app.post('/delete-note/:id', async (req, res) => {
     }
     
     try {
-        await Note.findByIdAndDelete(req.params.id); // Delete note by ID
+        await Note.findByIdAndDelete(req.params.id); 
         req.flash('success_msg', 'Note deleted successfully!');
         res.redirect('/notes');
     } catch (err) {
@@ -183,7 +182,7 @@ app.get('/edit-note/:id', async (req, res) => {
         if (!note) {
             return res.status(404).send('Note not found');
         }
-        res.render('edit-note', { note }); // Pass the note to the view
+        res.render('edit-note', { note }); 
     } catch (error) {
         console.error('Error fetching note:', error);
         res.status(500).send('Server error');
@@ -196,7 +195,7 @@ app.post('/update-note/:id', async (req, res) => {
     try {
         await Note.findByIdAndUpdate(req.params.id, {
             title: title,
-            content: content, // Raw HTML content
+            content: content, 
         });
         res.redirect('/notes');
     } catch (error) {
@@ -213,7 +212,7 @@ app.post('/toggle-star/:id', async (req, res) => {
     
     try {
         const note = await Note.findById(req.params.id);
-        note.isStarred = !note.isStarred; // Toggle star status
+        note.isStarred = !note.isStarred; 
         await note.save();
         req.flash('success_msg', `Note ${note.isStarred ? 'starred' : 'unstarred'}!`);
         res.redirect('/notes');
@@ -232,7 +231,7 @@ app.post('/toggle-pin/:id', async (req, res) => {
 
     try {
         const note = await Note.findById(req.params.id);
-        note.isPinned = !note.isPinned; // Toggle pinned status
+        note.isPinned = !note.isPinned; 
         await note.save();
         req.flash('success_msg', `Note ${note.isPinned ? 'pinned' : 'unpinned'}!`);
         res.redirect('/notes');
@@ -257,7 +256,7 @@ app.get('/logout', (req, res) => {
 
 // Search Notes Route
 app.get('/search-notes', async (req, res) => {
-    const { query } = req.query; // Get search query
+    const { query } = req.query;
     try {
         const notes = await Note.find({
             userId: req.session.userId,

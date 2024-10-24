@@ -78,3 +78,30 @@ to access the note-taking application.
 ## Contributing
 
 If you would like to contribute to this project, feel free to submit a pull request or open an issue.
+
+# Wins in this project
+
+## Hardest part
+- setting up enviroment
+- CRUD functions
+
+## What I've learned
+1. Web Development Fundamentals
+
+- HTML/CSS: Understand the structure and styling of web pages, including how to create forms, buttons, and layouts.
+- JavaScript: Gain proficiency in client-side scripting to enhance user interactions.
+
+2. Backend Development
+
+- Node.js: Learn how to set up a server, handle HTTP requests, and manage routes.
+- Express.js: Understand how to create web applications using a popular Node.js framework, including middleware and routing.
+
+3. Database Management
+
+- MongoDB: Learn about NoSQL databases, data modeling, and how to perform CRUD (Create, Read, Update, Delete) operations.
+- Mongoose: Use an ODM (Object Document Mapper) to interact with MongoDB, understanding schemas and data validation.
+
+4. User Authentication and Authorization
+
+- Session Management: Implement user registration, login, and session management to secure the application.
+- Passport.js: Learn how to integrate authentication strategies, including social login (like Google).

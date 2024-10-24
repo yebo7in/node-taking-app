@@ -57,15 +57,15 @@ echo. > .env
 MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/<dbname>?retryWrites=true&w=majority
 SESSION_SECRET=<Your Session Secret>
 ```
-- Replace <username>, <password>, and <dbname>:
-- <username>: Your MongoDB database username.
-- <password>: Your MongoDB database password (make sure to URL-encode any special characters).
-- <dbname>: The name of the database you want to connect to (you can create a new one if needed).
+- Replace "username", "password", and "dbname":
+- "username": Your MongoDB database username.
+- "password": Your MongoDB database password (make sure to URL-encode any special characters).
+- "dbname": The name of the database you want to connect to (you can create a new one if needed).
 ### 5. Start the Application
 
 Once your .env file is set up, you can start the application using the following command:
 ```bash
-npm start
+node app.js
 ```
 ### 6. Access the Application
 
